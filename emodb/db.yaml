@@ -1,0 +1,62 @@
+name: emodb
+description: Berlin Database of Emotional Speech A German database of emotional utterances
+  spoken by actors recorded as a part of the DFG funded research project SE462/3-1
+  in 1997 and 1999. Recordings took place in the anechoic chamber of the Technical
+  University Berlin, department of Technical Acoustics. It contains about 500 utterances
+  from ten different actors expressing basic six emotions and neutral.
+source: http://emodb.bilderbar.info
+usage: commercial
+languages: [German]
+media:
+  audb: {type: audio, format: wav, sampling_rate: 16000, channels: 1, mix: mono}
+  microphone: {type: audio, format: wav, sampling_rate: 16000, channels: 1}
+raters:
+  gold: {type: human}
+schemes:
+  duration: {dtype: time}
+  emotion:
+    description: Six basic emotions and neutral.
+    dtype: str
+    labels: [anger, boredom, disgust, fear, happiness, sadness, neutral]
+  speaker:
+    description: The actors could produce each sentence as often as they liked and
+      were asked to remember a real situation from their past when they had felt this
+      emotion.
+    dtype: int
+    labels:
+      3: {gender: male, age: 31, language: German}
+      8: {gender: female, age: 34, language: German}
+      9: {gender: male, age: 21, language: German}
+      10: {gender: female, age: 32, language: German}
+      11: {gender: male, age: 26, language: German}
+      12: {gender: male, age: 30, language: German}
+      13: {gender: female, age: 32, language: German}
+      14: {gender: female, age: 35, language: German}
+      15: {gender: male, age: 25, language: German}
+      16: {gender: female, age: 31, language: German}
+  transcription:
+    description: Sentence produced by actor.
+    dtype: str
+    labels: {a01: Der Lappen liegt auf dem Eisschrank., a02: Das will sie am Mittwoch
+        abgeben., a04: Heute abend könnte ich es ihm sagen., a05: Das schwarze Stück
+        Papier befindet sich da oben neben dem Holzstück., a07: In sieben Stunden
+        wird es soweit sein., b01: 'Was sind denn das für Tüten, die da unter dem
+        Tisch stehen.', b02: Sie haben es gerade hochgetragen und jetzt gehen sie
+        wieder runter., b03: An den Wochenenden bin ich jetzt immer nach Hause gefahren
+        und habe Agnes besucht., b09: Ich will das eben wegbringen und dann mit Karl
+        was trinken gehen., b10: 'Die wird auf dem Platz sein, wo wir sie immer hinlegen.'}
+tables:
+  emotion:
+    type: filewise
+    columns:
+      emotion: {scheme_id: emotion, rater_id: gold}
+      '@emotion': {}
+  files:
+    type: filewise
+    columns:
+      duration: {scheme_id: duration}
+      speaker: {scheme_id: speaker}
+      transcription: {scheme_id: transcription}
+audb: {root: /home/fburkhardt/ResearchProjects/tmp/emodb, version: 1.0.1, group_id: com.audeering.data.emodb,
+  only_metadata: false, include: null, exclude: null}
+pdf: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.130.8506&rep=rep1&type=pdf

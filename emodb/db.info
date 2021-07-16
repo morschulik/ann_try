@@ -1,0 +1,5 @@
+version: 1.0.1
+only_metadata: false
+format: wav
+sampling_rate: 16000
+mix: mono
